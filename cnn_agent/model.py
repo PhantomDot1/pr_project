@@ -1,19 +1,21 @@
 import tensorflow as tf
 
 
-class AgentModel(tf.keras.model):
-    def __init__(self, num_actions):
+class AgentModel(tf.keras.Model):
+    def __init__(self, num_actions, hidden_units, num_states):
         super(AgentModel, self).__init__()
 
         # input layer
-        # TODO: fix the input shape to suit the onscreen pixels or gamestate variables
+        # TODO: check if input layer still works for cnn
         self.input_layer = tf.keras.layers.InputLayer(input_shape=())
 
         self.hidden_layers = []
-        # TODO: add hidden layers to list for network
+        # TODO: add hidden layers:
+        # TODO: Conv layers
+        # TODO: flatten?
+        # TODO: LSTM layer?
 
-        self.output_layer = tf.keras.layers.Dense(
-            num_actions, activation="linear", kernel_initializer='RandomNormal')
+        self.output_layer = tf.keras.layers.Dense(num_actions, activation="linear", kernel_initializer='RandomNormal')
 
     @tf.function
     def call(self, input_shape):
