@@ -100,6 +100,8 @@ def main():
                 shutil.rmtree(save_dir)
                 print("Removed old checkpoint...")
                 break
+        else:
+            break
 
     N = 50000
     total_rewards = np.empty(N)
