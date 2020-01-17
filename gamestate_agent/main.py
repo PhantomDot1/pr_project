@@ -8,7 +8,7 @@ from gym import wrappers
 from agent import DQN
 
 # Some control variables
-create_video = False
+create_video = True
 render = False
 save_dir = './models/'
 save_path = './models/model'
@@ -63,7 +63,7 @@ def make_video(env, TrainNet):
 
 
 def main():
-    env = retro.make(game='Frogger-Genesis', use_restricted_actions=retro.Actions.DISCRETE)
+    env = retro.make(game='Frogger-Genesis', use_restricted_actions=retro.Actions.DISCRETE, obs_type=retro.Observations.RAM)
     gamma = 0.99
     copy_step = 25
     num_actions = env.action_space.n
