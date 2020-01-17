@@ -7,7 +7,7 @@ class AgentModel(tf.keras.Model):
 
         # input layer
         # TODO: check if input layer still works for cnn
-        self.input_layer = tf.keras.layers.InputLayer(input_shape=())
+        self.input_layer = tf.keras.layers.InputLayer()
 
         self.hidden_layers = []
         # hidden_units = [10, 10, 10]
@@ -15,13 +15,13 @@ class AgentModel(tf.keras.Model):
         #         self.hidden_layers.append(
         #             tf.keras.layers.Dense(i, activation='relu'))
 
-        conv_1 = tf.keras.layers.Conv2D(16, 8, 8, subsample=(4, 4), activation='relu')#(normalized)
+        conv_1 = tf.keras.layers.Conv2D(filters=16, kernel_size=(33, 40), strides=(4, 4), activation='relu')#(normalized)
         self.hidden_layers.append(conv_1)
 
-    # TODO: add hidden layers:
-    # TODO: Conv layers
-    # TODO: flatten?
-    # TODO: LSTM layer?
+        # TODO: add hidden layers:
+        # TODO: Conv layers
+        # TODO: flatten?
+        # TODO: LSTM layer?
 
         self.output_layer = tf.keras.layers.Dense(num_actions, activation="linear", kernel_initializer='RandomNormal')
 
