@@ -4,6 +4,7 @@ import retro
 import os
 import shutil
 import datetime
+import cv2
 from gym import wrappers
 from agent import DQN
 
@@ -20,7 +21,23 @@ def play_game(env, TrainNet, TargetNet, epsilon, copy_step):
     done = False
 
     # TODO: change observation to preprocessed pixel inputs!
-    #observations = env.reset()
+    observations = env.reset()
+    # # print("**************")
+    # print("first size")
+    # print(len(observations))
+    # print("second size")
+    # print(len(observations[0]))
+    # print("type:")
+    # print(type(observations))
+    # print("first member:")
+    # print(observations[0])
+    # print("shape:")
+    # print(observations.shape)
+    # cv2.imshow("observations image", observations);
+    # cv2.waitKey();
+    # #print(observations)
+    # print("**************")
+    # input("pause")
 
     while not done:
         if render:
@@ -120,7 +137,7 @@ def main():
             tf.summary.scalar("episode reward", total_reward, step=n)
             tf.summary.scalar("running avg reward(100)", avg_rewards, step=n)
 
-        if n % 100 == 0:
+        if n % 10 == 0:
             print("episode:", n, "episode reward:", total_reward,
                   "eps:", epsilon, "avg reward (last 100):", avg_rewards)
 

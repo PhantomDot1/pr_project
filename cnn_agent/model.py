@@ -10,10 +10,18 @@ class AgentModel(tf.keras.Model):
         self.input_layer = tf.keras.layers.InputLayer(input_shape=())
 
         self.hidden_layers = []
-        # TODO: add hidden layers:
-        # TODO: Conv layers
-        # TODO: flatten?
-        # TODO: LSTM layer?
+        # hidden_units = [10, 10, 10]
+        # for i in hidden_units:
+        #         self.hidden_layers.append(
+        #             tf.keras.layers.Dense(i, activation='relu'))
+
+        conv_1 = tf.keras.layers.Conv2D(16, 8, 8, subsample=(4, 4), activation='relu')#(normalized)
+        self.hidden_layers.append(conv_1)
+
+    # TODO: add hidden layers:
+    # TODO: Conv layers
+    # TODO: flatten?
+    # TODO: LSTM layer?
 
         self.output_layer = tf.keras.layers.Dense(num_actions, activation="linear", kernel_initializer='RandomNormal')
 
