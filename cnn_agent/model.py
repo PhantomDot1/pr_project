@@ -15,9 +15,10 @@ class AgentModel(tf.keras.Model):
         #         self.hidden_layers.append(
         #             tf.keras.layers.Dense(i, activation='relu'))
 
-        conv_1 = tf.keras.layers.Conv2D(filters=16, kernel_size=(33, 40), strides=(4, 4), activation='relu')#(normalized)
-        self.hidden_layers.append(conv_1)
-
+        self.hidden_layers.append(tf.keras.layers.Conv2D(filters=16, kernel_size=(8, 8), strides=(4, 4), activation='relu'))
+        self.hidden_layers.append(tf.keras.layers.Conv2D(filters=16, kernel_size=(4, 4), strides=(4, 4), activation='relu'))
+        self.hidden_layers.append(tf.keras.layers.Conv2D(filters=16, kernel_size=(4, 4), strides=(2, 2), activation='relu'))
+        self.hidden_layers.append(tf.keras.layers.Flatten())
         # TODO: add hidden layers:
         # TODO: Conv layers
         # TODO: flatten?
