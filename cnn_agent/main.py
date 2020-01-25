@@ -82,6 +82,7 @@ def make_video(env, TrainNet):
 
 def main():
     env = retro.make(game='Frogger-Genesis', use_restricted_actions=retro.Actions.DISCRETE)
+    env = wrappers.FrameStack(env, 4)
     gamma = 0.99
     copy_step = 25
     num_actions = env.action_space.n
@@ -125,26 +126,31 @@ def main():
     epsilon = 0.99
     decay = 0.9999
     min_epsilon = 0.1
+    max_avg_score = 0
 
     # play N games
     for n in range(N):
         epsilon = max(min_epsilon, epsilon * decay)
         total_reward = play_game(env, TrainNet, TargetNet, epsilon, copy_step)
         total_rewards[n] = total_reward
-        avg_rewards = total_rewards[max(0, n - 100):(n + 1)].mean()
+        avg_rewards = total_rewards[max(0, n - 10):(n + 1)].mean()
 
         with summary_writer.as_default():
             tf.summary.scalar("episode reward", total_reward, step=n)
-            tf.summary.scalar("running avg reward(100)", avg_rewards, step=n)
+            tf.summary.scalar("running avg reward(10)", avg_rewards, step=n)
 
         if n % 10 == 0:
+            if avg_rewards > max_avg_score:
+                max_avg_score = avg_rewards
+
             print("episode:", n, "episode reward:", total_reward,
-                  "eps:", epsilon, "avg reward (last 100):", avg_rewards)
+                  "eps:", epsilon, "avg reward (last 10):", avg_rewards,
+                  "max avg reward(10):", max_avg_score)
 
             # save the model weights
             TargetNet.save_model(save_path)
 
-    print("avg reward for last 100 episodes:", avg_rewards)
+    print("avg reward for last 10 episodes:", avg_rewards)
 
     if create_video:
         make_video(env, TrainNet)

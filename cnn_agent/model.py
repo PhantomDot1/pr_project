@@ -15,16 +15,17 @@ class AgentModel(tf.keras.Model):
         #         self.hidden_layers.append(
         #             tf.keras.layers.Dense(i, activation='relu'))
 
-        self.hidden_layers.append(tf.keras.layers.Conv2D(filters=16, kernel_size=(8, 8), strides=(4, 4), activation='relu'))
-        self.hidden_layers.append(tf.keras.layers.Conv2D(filters=16, kernel_size=(4, 4), strides=(4, 4), activation='relu'))
-        self.hidden_layers.append(tf.keras.layers.Conv2D(filters=16, kernel_size=(4, 4), strides=(2, 2), activation='relu'))
+        self.hidden_layers.append(tf.keras.layers.Conv2D(filters=32, kernel_size=(8, 8), strides=(4, 4), activation='relu'))
+        self.hidden_layers.append(tf.keras.layers.Conv2D(filters=32, kernel_size=(4, 4), strides=(2, 2), activation='relu'))
+        self.hidden_layers.append(tf.keras.layers.Conv2D(filters=32, kernel_size=(3, 3), strides=(1, 1), activation='relu'))
         self.hidden_layers.append(tf.keras.layers.Flatten())
+        self.hidden_layers.append(tf.keras.layers.Dense(512, activation="relu"))
         # TODO: add hidden layers:
         # TODO: Conv layers
         # TODO: flatten?
         # TODO: LSTM layer?
 
-        self.output_layer = tf.keras.layers.Dense(num_actions, activation="linear", kernel_initializer='RandomNormal')
+        self.output_layer = tf.keras.layers.Dense(num_actions, activation="linear")
 
     @tf.function
     def call(self, input_shape):

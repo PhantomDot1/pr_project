@@ -18,7 +18,7 @@ class DQN:
         # accepts single state (as a 2d input) or batch of states, runs a forward pass and returns the model results
         # (logits for actions)
         temp = np.atleast_2d(inputs.astype('float32'))
-        temp = temp.reshape(1,224,320,3)
+        # temp = temp.reshape(1,210,160,3)
         return self.model(temp)
 
     # Function to train the network using replay experience training
